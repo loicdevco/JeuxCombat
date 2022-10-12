@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class combat {
 	public static void main(String[] args) {
 
-		final int nbreJoueur = 2;
+		final int nbreJoueur = 4;
 		int i = 0;
 		String nextType = "CRS";
 
@@ -52,7 +52,6 @@ public class combat {
 					Players.add(perso);
 				}
 			}
-			System.out.println(Players);
 
 		} while (Players.size() < nbreJoueur);
 
@@ -87,11 +86,13 @@ public class combat {
 
 						if (attaquant.existe == false) {
 							PlayersMatch.remove(a);
-							System.out.println(defenseur.nom + " a gagné le round " + round);
+							System.out.println(consoleColor.YELLOW_BACKGROUND + defenseur.nom + " a gagné le round "
+									+ round + consoleColor.RESET);
 							round++;
 						} else if (defenseur.existe == false) {
 							PlayersMatch.remove(d);
-							System.out.println(attaquant.nom + " a gagné le round " + round);
+							System.out.println(consoleColor.BLUE_BACKGROUND + attaquant.nom + " a gagné le round "
+									+ round + consoleColor.RESET);
 							round++;
 						}
 					}
@@ -111,8 +112,5 @@ public class combat {
 		System.out.println(winner.nom);
 		winner.info();
 	}
-
-	// PlayersMatch.get(i).Attaquer(PlayersMatch.get(i + 1));
-	// PlayersMatch.get(i + 1).Attaquer(PlayersMatch.get(i));
 
 }

@@ -16,14 +16,15 @@ public class CRS extends Personnage {
 
 		int chance = nombreAleatoire(0, 10);
 
-		super.Attaquer(gj);
-
 		if (chance >= 7 && chance <= 9) {
 			Fumigene(gj);
 
 		} else if (chance == 10) {
 			CanonEau(gj);
 
+		} else {
+			super.Attaquer(gj);
+			System.out.println(consoleColor.PURPLE_BACKGROUND + "Aucun coup special !!!" + consoleColor.RESET);
 		}
 
 		this.info();
@@ -33,12 +34,12 @@ public class CRS extends Personnage {
 
 	public void Fumigene(Personnage gj) {
 		gj.setVie(gj.getVie() - 5);
-		System.out.println("attaque Fumigene sur " + gj.nom);
+		System.out.println(consoleColor.WHITE_BACKGROUND + "attaque Fumigene sur " + gj.nom + consoleColor.RESET);
 	}
 
 	public void CanonEau(Personnage gj) {
 		gj.setVie(gj.getVie() - 10);
-		System.out.println("attaque canon à eau sur " + gj.nom);
+		System.out.println(consoleColor.CYAN_BACKGROUND + "attaque canon à eau sur " + gj.nom);
 	}
 
 }

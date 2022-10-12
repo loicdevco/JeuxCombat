@@ -24,7 +24,7 @@ public class GJ extends Personnage {
 
 		} else {
 			super.Attaquer(crs);
-			System.out.println("Aucun coup special !!!");
+			System.out.println(consoleColor.PURPLE_BACKGROUND + "Aucun coup special !!!" + consoleColor.RESET);
 		}
 
 		this.info();

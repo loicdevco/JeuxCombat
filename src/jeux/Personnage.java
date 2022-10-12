@@ -61,7 +61,9 @@ public class Personnage {
 		if (vie <= 100) {
 			if (vie <= 0) {
 				vie = 0;
+
 				this.setExiste(false);
+				System.out.println(consoleColor.RED_BACKGROUND + this.nom + " is Dead " + consoleColor.RESET);
 			}
 			this.vie = vie;
 		} else {
@@ -100,21 +102,18 @@ public class Personnage {
 	}
 
 	public void setExiste(boolean existe) {
-		if (existe == false) {
-			System.out.println(this.nom + " est mort!");
-		}
 		this.existe = existe;
 	}
 
 	public void info() {
-		System.out.println(this.nom + " est un " + this.type + " a " + this.vie + " points de vie, " + this.attaque
-				+ " points d'attaque et enfin " + this.defense + " points de defense.");
+		System.out.println(this.type + "\n" + this.nom + "\n" + "points de vie : " + this.vie + " \n" + "Attaque : "
+				+ this.attaque + "\ndefense : " + this.defense);
 	}
 
 	public void Attaquer(Personnage defenseur) {
 		if (this.existe && defenseur.existe && this != defenseur) {
 			System.out.println(
-					this.nom + " est un " + this.type + " attaque " + defenseur.nom + " qui est un " + defenseur.type);
+					this.type + " -> " + this.nom + " attaque " + defenseur.nom + " qui est un " + defenseur.type);
 			if (this.attaque > defenseur.defense) {
 				defenseur.setVie(defenseur.vie - 10);
 			} else if (this.attaque == defenseur.defense) {
