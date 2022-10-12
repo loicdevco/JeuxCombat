@@ -9,6 +9,8 @@ public class combat {
 
 		final int nbreJoueur = 4;
 		int i = 0;
+		String nextType = "CRS";
+
 		ArrayList<Personnage> Players = new ArrayList<Personnage>();
 
 		Scanner sc = new Scanner(System.in);
@@ -28,48 +30,86 @@ public class combat {
 					}
 				}
 				if (isExist == false) {
-					Personnage perso = new Personnage(nomJoueur);
+					if (Players.size() % 2 == 0) {
+						Personnage perso = new CRS(nomJoueur);
+						perso.info();
+						Players.add(perso);
+					} else {
+						Personnage perso = new GJ(nomJoueur);
+						perso.info();
+						Players.add(perso);
+					}
+
+				}
+			} else {
+				if (Players.size() % 2 == 0) {
+					Personnage perso = new CRS(nomJoueur);
+					perso.info();
+					Players.add(perso);
+				} else {
+					Personnage perso = new GJ(nomJoueur);
 					perso.info();
 					Players.add(perso);
 				}
-			} else {
-				Personnage perso = new Personnage(nomJoueur);
-				perso.info();
-				Players.add(perso);
 			}
 			System.out.println(Players);
 
 		} while (Players.size() < nbreJoueur);
+
 		run(Players);
+
 	}
 
 	public static void run(ArrayList<Personnage> PlayersMatch) {
 
-		while (PlayersMatch.size() > 1) {
+		Personnage winner;
+		int round = 1;
 
-			int a = 0;
-			int d = 0;
+		if (PlayersMatch.size() % 2 == 0) {
+			while (PlayersMatch.size() > 1) {
 
-			do {
-				a = new Random().nextInt(PlayersMatch.size());
-				d = new Random().nextInt(PlayersMatch.size());
-			} while (a == d);
+				int a = 0;
+				int d = 0;
 
-			Personnage attaquant = PlayersMatch.get(a);
-			Personnage defenseur = PlayersMatch.get(d);
+				do {
+					a = new Random().nextInt(PlayersMatch.size());
+					d = new Random().nextInt(PlayersMatch.size());
+				} while (a == d);
 
-			attaquant.Attaquer(defenseur);
-			defenseur.Attaquer(attaquant);
+				Personnage attaquant = PlayersMatch.get(a);
+				Personnage defenseur = PlayersMatch.get(d);
 
-			if (attaquant.existe == false) {
-				PlayersMatch.remove(a);
-			} else if (defenseur.existe == false) {
-				PlayersMatch.remove(d);
+				if (attaquant.type != defenseur.type) {
+					System.out.println("debut du round " + round);
+					while (attaquant.existe == true && defenseur.existe == true) {
+
+						attaquant.Attaquer(defenseur);
+
+						if (attaquant.existe == false) {
+							PlayersMatch.remove(a);
+							System.out.println(defenseur.nom + " a gagné le round " + round);
+							round++;
+						} else if (defenseur.existe == false) {
+							PlayersMatch.remove(d);
+							System.out.println(attaquant.nom + " a gagné le round " + round);
+							round++;
+						}
+					}
+
+				}
+
 			}
 
+			winner = PlayersMatch.get(0);
+			win(winner);
+			// System.out.println(PlayersMatch.get(0).nom + " a gagné!!");
 		}
-		System.out.println(PlayersMatch.get(0).nom + " a gagné !!!!");
 
+	}
+
+	public static void win(Personnage winner) {
+		System.out.println(winner.nom);
+		winner.info();
 	}
 
 	// PlayersMatch.get(i).Attaquer(PlayersMatch.get(i + 1));

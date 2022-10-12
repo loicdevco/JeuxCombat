@@ -9,6 +9,7 @@ public class Personnage {
 	protected int attaque;
 	protected int defense;
 	protected boolean existe;
+	protected String type;
 
 	public Personnage(String param_nom) {
 		if (param_nom == null || param_nom == "") {
@@ -26,7 +27,15 @@ public class Personnage {
 		this.vie = nombreAleatoire(20, 100);
 		this.attaque = nombreAleatoire(20, 100);
 		this.defense = nombreAleatoire(20, 100);
+		this.type = "";
+	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public static int nombreAleatoire(int min, int max) {
@@ -49,11 +58,15 @@ public class Personnage {
 	}
 
 	public void setVie(int vie) {
-		if (vie <= 0) {
-			vie = 0;
-			this.setExiste(false);
+		if (vie <= 100) {
+			if (vie <= 0) {
+				vie = 0;
+				this.setExiste(false);
+			}
+			this.vie = vie;
+		} else {
+			System.out.println("error");
 		}
-		this.vie = vie;
 	}
 
 	public int getAttaque() {
@@ -61,7 +74,12 @@ public class Personnage {
 	}
 
 	public void setAttaque(int attaque) {
-		this.attaque = attaque;
+		if (attaque <= 100 || attaque >= 20) {
+			this.attaque = attaque;
+		} else {
+			System.out.println("error");
+		}
+
 	}
 
 	public int getDefense() {
@@ -69,7 +87,12 @@ public class Personnage {
 	}
 
 	public void setDefense(int defense) {
-		this.defense = defense;
+		if (defense <= 100 || defense >= 20) {
+			this.defense = defense;
+		} else {
+			System.out.println("error");
+		}
+
 	}
 
 	public boolean isExiste() {
@@ -84,13 +107,14 @@ public class Personnage {
 	}
 
 	public void info() {
-		System.out.println(this.nom + " a " + this.vie + " points de vie, " + this.attaque
+		System.out.println(this.nom + " est un " + this.type + " a " + this.vie + " points de vie, " + this.attaque
 				+ " points d'attaque et enfin " + this.defense + " points de defense.");
 	}
 
 	public void Attaquer(Personnage defenseur) {
 		if (this.existe && defenseur.existe && this != defenseur) {
-			System.out.println(this.nom + " attaque " + defenseur.nom);
+			System.out.println(
+					this.nom + " est un " + this.type + " attaque " + defenseur.nom + " qui est un " + defenseur.type);
 			if (this.attaque > defenseur.defense) {
 				defenseur.setVie(defenseur.vie - 10);
 			} else if (this.attaque == defenseur.defense) {
