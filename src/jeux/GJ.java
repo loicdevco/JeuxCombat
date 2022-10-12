@@ -16,14 +16,15 @@ public class GJ extends Personnage {
 
 		int chance = nombreAleatoire(0, 10);
 
-		super.Attaquer(crs);
-
 		if (chance >= 7 && chance <= 9) {
 			Caillassage(crs);
 
 		} else if (chance == 10) {
 			MouvementDeFoule(crs);
 
+		} else {
+			super.Attaquer(crs);
+			System.out.println("Aucun coup special !!!");
 		}
 
 		this.info();
@@ -37,7 +38,7 @@ public class GJ extends Personnage {
 	}
 
 	public void MouvementDeFoule(Personnage crs) {
-		crs.setVie(crs.getVie() - 10);
+		crs.setVie(crs.getVie() - 15);
 		System.out.println("attaque Mouvement de Foule sur " + crs.nom);
 	}
 

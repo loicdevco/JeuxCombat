@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class combat {
 	public static void main(String[] args) {
 
-		final int nbreJoueur = 4;
+		final int nbreJoueur = 2;
 		int i = 0;
 		String nextType = "CRS";
 
