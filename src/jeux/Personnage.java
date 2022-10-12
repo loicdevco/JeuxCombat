@@ -122,8 +122,6 @@ public class Personnage {
 			} else {
 				this.setVie(this.vie - 5);
 			}
-			this.info();
-			defenseur.info();
 		}
 
 	}

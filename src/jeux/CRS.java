@@ -12,4 +12,33 @@ public class CRS extends Personnage {
 		this.setType("CRS");
 	}
 
+	public void Attaquer(Personnage gj) {
+
+		int chance = nombreAleatoire(0, 10);
+
+		super.Attaquer(gj);
+
+		if (chance >= 7 && chance <= 9) {
+			Fumigene(gj);
+
+		} else if (chance == 10) {
+			CanonEau(gj);
+
+		}
+
+		this.info();
+		gj.info();
+
+	}
+
+	public void Fumigene(Personnage gj) {
+		gj.setVie(gj.getVie() - 5);
+		System.out.println("attaque Fumigene sur " + gj.nom);
+	}
+
+	public void CanonEau(Personnage gj) {
+		gj.setVie(gj.getVie() - 10);
+		System.out.println("attaque canon à eau sur " + gj.nom);
+	}
+
 }
